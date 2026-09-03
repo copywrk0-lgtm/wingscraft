@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://wingscraft-demo.vercel.app/sitemap.xml
