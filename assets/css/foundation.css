@@ -1,0 +1,203 @@
+/* WingsCraft / Copywrk OS — Phase 1 foundation
+   Mobile-first tokens, primitives and reusable components.
+   Visual page-specific styling remains in /style.css until Phase 2. */
+
+:root {
+  /* Color */
+  --wc-ink: #15110f;
+  --wc-ink-soft: #332b27;
+  --wc-paper: #f7f3ec;
+  --wc-cream: #f2ede5;
+  --wc-sand: #e8dfd3;
+  --wc-wine: #5d1723;
+  --wc-gold: #ba956a;
+  --wc-white: #fff;
+  --wc-muted: #6b615b;
+  --wc-line: rgba(21, 17, 15, .16);
+  --wc-line-inverse: rgba(255, 255, 255, .16);
+
+  /* Typography */
+  --wc-font-display: "Italiana", Georgia, "Times New Roman", serif;
+  --wc-font-body: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --wc-fs-0: .75rem;
+  --wc-fs-1: .875rem;
+  --wc-fs-2: 1rem;
+  --wc-fs-3: clamp(1.25rem, 1.1rem + .75vw, 1.75rem);
+  --wc-fs-4: clamp(2rem, 1.55rem + 2.3vw, 3.5rem);
+  --wc-fs-5: clamp(3rem, 2.1rem + 4.5vw, 6.5rem);
+  --wc-leading-tight: .98;
+  --wc-leading-copy: 1.65;
+  --wc-tracking-eyebrow: .18em;
+
+  /* Spacing: 4px base */
+  --wc-space-1: .25rem;
+  --wc-space-2: .5rem;
+  --wc-space-3: .75rem;
+  --wc-space-4: 1rem;
+  --wc-space-5: 1.25rem;
+  --wc-space-6: 1.5rem;
+  --wc-space-8: 2rem;
+  --wc-space-10: 2.5rem;
+  --wc-space-12: 3rem;
+  --wc-space-16: 4rem;
+  --wc-space-20: 5rem;
+  --wc-space-24: 6rem;
+  --wc-space-32: 8rem;
+
+  /* Layout */
+  --wc-gutter: clamp(1.25rem, 4vw, 4rem);
+  --wc-container: 90rem;
+  --wc-copy: 42rem;
+  --wc-nav-height: 4.25rem;
+  --wc-section-space: clamp(4.75rem, 9vw, 9rem);
+
+  /* Radius + motion */
+  --wc-radius-sm: .5rem;
+  --wc-radius-md: .875rem;
+  --wc-radius-pill: 999px;
+  --wc-ease: cubic-bezier(.22, 1, .36, 1);
+  --wc-duration-fast: 180ms;
+  --wc-duration: 320ms;
+  --wc-duration-slow: 700ms;
+
+  /* Layering */
+  --wc-z-content: 1;
+  --wc-z-nav: 100;
+  --wc-z-overlay: 200;
+  --wc-z-toast: 300;
+}
+
+/* Accessible, predictable primitives */
+html { color-scheme: light; }
+body { min-width: 20rem; }
+img, picture, video, canvas, svg { max-width: 100%; }
+img, video { height: auto; }
+button, input, textarea, select { font: inherit; }
+button, a { touch-action: manipulation; }
+:focus-visible { outline: 2px solid var(--wc-gold); outline-offset: 4px; }
+
+.wc-skip-link {
+  position: fixed;
+  inset: .75rem auto auto .75rem;
+  z-index: calc(var(--wc-z-toast) + 1);
+  padding: .7rem 1rem;
+  background: var(--wc-white);
+  color: var(--wc-ink);
+  transform: translateY(-180%);
+  transition: transform var(--wc-duration-fast) var(--wc-ease);
+}
+.wc-skip-link:focus { transform: translateY(0); }
+
+/* Layout primitives */
+.wc-container {
+  width: min(100%, var(--wc-container));
+  margin-inline: auto;
+  padding-inline: var(--wc-gutter);
+}
+.wc-section { padding-block: var(--wc-section-space); }
+.wc-stack { display: flex; flex-direction: column; gap: var(--wc-space-6); }
+.wc-cluster { display: flex; flex-wrap: wrap; align-items: center; gap: var(--wc-space-4); }
+.wc-grid { display: grid; gap: var(--wc-space-8); }
+.wc-copy { max-width: var(--wc-copy); }
+.wc-bleed { width: 100vw; margin-left: calc(50% - 50vw); }
+
+/* Typography primitives */
+.wc-eyebrow {
+  margin: 0;
+  font-size: var(--wc-fs-0);
+  font-weight: 600;
+  letter-spacing: var(--wc-tracking-eyebrow);
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+.wc-display {
+  margin: 0;
+  font-family: var(--wc-font-display);
+  font-size: var(--wc-fs-5);
+  font-weight: 400;
+  letter-spacing: -.035em;
+  line-height: var(--wc-leading-tight);
+  text-wrap: balance;
+}
+.wc-title {
+  margin: 0;
+  font-family: var(--wc-font-display);
+  font-size: var(--wc-fs-4);
+  font-weight: 400;
+  letter-spacing: -.025em;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+.wc-copy-text { margin: 0; font-size: var(--wc-fs-1); line-height: var(--wc-leading-copy); }
+
+/* Reusable controls */
+.wc-button {
+  min-height: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  padding: .85rem 1.1rem;
+  border: 1px solid transparent;
+  background: var(--wc-wine);
+  color: var(--wc-white);
+  font-size: var(--wc-fs-0);
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  transition: transform var(--wc-duration-fast) var(--wc-ease), background var(--wc-duration-fast) var(--wc-ease);
+}
+.wc-button:active { transform: translateY(1px); }
+.wc-button--ghost { background: transparent; border-color: currentColor; }
+.wc-link {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: .75rem;
+  border-bottom: 1px solid currentColor;
+  font-size: var(--wc-fs-0);
+}
+
+/* Media + card primitives */
+.wc-media { position: relative; overflow: hidden; background: var(--wc-cream); }
+.wc-media > img, .wc-media > video { width: 100%; height: 100%; object-fit: cover; }
+.wc-card { border-top: 1px solid var(--wc-line); padding-block: var(--wc-space-6); }
+
+/* Forms */
+.wc-field { display: grid; gap: .5rem; }
+.wc-field label { font-size: var(--wc-fs-0); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.wc-field input, .wc-field textarea, .wc-field select {
+  width: 100%;
+  min-height: 3rem;
+  border: 0;
+  border-bottom: 1px solid var(--wc-line);
+  border-radius: 0;
+  padding: .7rem 0;
+  background: transparent;
+  color: inherit;
+}
+.wc-field textarea { min-height: 8rem; resize: vertical; }
+
+/* Visibility utilities */
+.wc-only-desktop { display: none !important; }
+
+@media (min-width: 48rem) {
+  .wc-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wc-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .wc-only-mobile { display: none !important; }
+  .wc-only-desktop { display: initial !important; }
+}
+
+@media (min-width: 64rem) {
+  .wc-grid--asymmetric { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(3rem, 7vw, 8rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
