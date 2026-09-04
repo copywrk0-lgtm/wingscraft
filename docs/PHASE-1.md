@@ -78,9 +78,21 @@ The existing WingsCraft repository is a static multi-page site. Phase 1 keeps it
 - [x] Add design tokens and layout primitives.
 - [x] Add base controls, media, card, form and typography components.
 - [x] Define mobile-first breakpoints and accessibility behavior.
-- [ ] Migrate each page from legacy selectors to shared `wc-*` primitives.
+- [x] Migrate Home, About, Services, Weddings, Destinations, Gallery and Contact to shared `wc-*` primitives.
+- [x] Add skip-navigation and reusable focus/reduced-motion behavior across the page set.
 - [ ] Move remote/placeholder media into production asset pipeline after client assets arrive.
 - [ ] Consolidate repeated header/footer markup when the project is moved to a component framework.
+
+## What is now shared across pages
+
+- Foundation stylesheet imported before page-specific styling.
+- Hero typography uses shared display/eyebrow/copy roles.
+- Core sections consume shared section spacing.
+- Cards, portfolio blocks, service rows and process steps consume the shared card primitive.
+- Major media regions consume the shared media primitive.
+- Primary CTAs consume the shared button primitive.
+- Contact fields consume the shared field primitive.
+- Responsive process/contact layouts consume shared grid primitives.
 
 ## Definition of done before visual polish
 
